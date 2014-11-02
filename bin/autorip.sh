@@ -1,4 +1,7 @@
 #!/bin/bash
+# AutoRip: Automatically ripping of multimedia discs.
+# Copyright (C) 2014, Aaron Meier <aaron@bluespeed.org>
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -11,6 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 #
 # File:         autorip.sh
 # Description:  Automatically rips audio discs, dvds and blurays
@@ -230,9 +234,9 @@ function ripBluRay(){
 }
 
 # Main entry point of this script
-cd $AUTORIP_DIR
-echo '' > $MAIN_LOG
-echo '' > $FULL_LOG
+#cd $AUTORIP_DIR
+#echo '' > $MAIN_LOG
+#echo '' > $FULL_LOG
 if [ $# == 1 ]; then
     case "$1" in
         '-audio' )
@@ -252,6 +256,11 @@ if [ $# == 1 ]; then
             ;;
     esac;
 else
+    echo -e "\n \
+AutoRip Copyright (C) 2014 Aaron Meier <aaron@bluespeed.org> \n \
+This program comes with ABSOLUTELY NO WARRANTY; for details see COPYING. \n \
+This is free software, and you are welcome to redistribute it \n \
+under certain conditions; see COPYING for details."
     echo -e '\n[ERROR] Wrong parameter detected\n'
     echo -e 'Syntax:\t' $0 ' -TYP\n'
     echo -e '\t-audio\tRips an audio disc\n'
