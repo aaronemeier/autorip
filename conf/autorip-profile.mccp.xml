@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<profile>
+    <name lang="eng">autorip</name>
+    <mkvSettings ignoreForcedSubtitlesFlag="true" />
+    <outputSettings name="copy" outputFormat="directCopy">
+        <description lang="eng">Copy track as it is</description>
+    </outputSettings>
+    <trackSettings input="default">
+        <output outputSettingsName="copy" defaultSelection="-sel:all,+sel:audio*(deu),-sel:(havemulti),-sel:mvcvideo,+sel:subtitle*(deu|eng),-sel:special,=100:all,-10:deu">
+        </output>
+    </trackSettings>
+</profile>

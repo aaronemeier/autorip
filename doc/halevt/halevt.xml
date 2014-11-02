@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<halevt:Configuration version="0.1" xmlns:halevt="http://www.environnement.ens.fr/perso/dumas/halevt.html">
+ 
+<!--
+    |
+    |  AutoRip Settings
+    |
+    -->
+ 
+<!-- Audio -->
+<halevt:Device match="hal.volume.disc.has_audio=true">
+    <halevt:Insertion exec="/opt/autorip/bin/autorip.sh -audio"/>
+</halevt:Device>
+ 
+<!-- Video (DVD) -->
+<halevt:Device match="hal.volume.disc.is_videodvd=true">
+    <halevt:Insertion exec="/opt/autorip/bin/autorip.sh -dvd"/>
+</halevt:Device>
+ 
+<!-- Video (Blu-Ray) -->
+<halevt:Device match="hal.volume.disc.is_blurayvideo=true">
+    <halevt:Insertion exec="/opt/autorip/bin/autorip.sh -bluray"/>
+</halevt:Device>
+ 
+</halevt:Configuration>
