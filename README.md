@@ -1,7 +1,7 @@
 # AutoRip
-With AutoRip you can save and convert audio and video discs automatically.
-All you need is a Linux box (without X) and a disc drive.
-In fact, AutoRip acts as a web frontend for MakeMKV, ABCDE and Handbrake.
+With AutoRip you can save and convert audio and video discs automatically.  
+All you need is a Linux box (without X) and a disc drive.   
+In fact, AutoRip acts as a web frontend for MakeMKV, ABCDE and Handbrake.  
 
 ## Requirements and Dependencies
 To automate this process, you need some third party tools installed.
@@ -43,8 +43,10 @@ useradd -M -s /usr/sbin/nologin -d /opt/autorip autorip
 chown -R autorip.autorip /opt/autorip
 ```
 
-Configure the settings as needed.
-At least set up a directory and the disc drive (e.g. CDROM, OUTPUTDIR WAVOUTPUTDIR for audio.conf,  DVD_SRC, DVD_OUT for dvd.conf and BLURAY_SRC, BLURAY_OUT for bluray.conf).
+Configure the settings as needed.  
+At least set up a directory and the disc drive (e.g. CDROM, OUTPUTDIR WAVOUTPUTDIR for audio.conf,  
+DVD_SRC, DVD_OUT for dvd.conf and BLURAY_SRC, BLURAY_OUT for bluray.conf).  
+
 ```bash
 su -s /bin/bash autorip
 editor ~/conf/audio.conf
@@ -66,7 +68,7 @@ service halevt restart
 
 
 ### Nginx
-In order to have a very small memory footprint I use Nginx.
+In order to have a very small memory footprint I use Nginx.  
 Of course you can also use Apache2 for this.
 
  ```bash
@@ -78,19 +80,20 @@ service nginx restart
 ```
 
 ## License
-General Public License, Version 3.0
->This program is free software: you can redistribute it and/or modify
->it under the terms of the GNU General Public License as published by
->the Free Software Foundation, either version 3 of the License, or
->(at your option) any later version.
+General Public License, Version 3.0  
 
->This program is distributed in the hope that it will be useful,
->but WITHOUT ANY WARRANTY; without even the implied warranty of
->MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
->GNU General Public License for more details.
-
->You should have received a copy of the GNU General Public License
->along with this program.  If not, see <http://www.gnu.org/licenses/>.
+>This program is free software: you can redistribute it and/or modify  
+>it under the terms of the GNU General Public License as published by  
+>the Free Software Foundation, either version 3 of the License, or  
+>(at your option) any later version.  
+>
+>This program is distributed in the hope that it will be useful,  
+>but WITHOUT ANY WARRANTY; without even the implied warranty of  
+>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
+>GNU General Public License for more details.  
+>
+>You should have received a copy of the GNU General Public License  
+>along with this program.  If not, see <http://www.gnu.org/licenses/>.  
 
 ## Credits
 AutoRip makes use of the following projects:
