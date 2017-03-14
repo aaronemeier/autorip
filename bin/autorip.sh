@@ -21,19 +21,9 @@
 #               via third party tools.
 # Author:       Aaron Meier <aaron@bluespeed.org>
 
-# Script settings
-AUTORIP_DIR='/opt/autorip/bin/'
-AUDIO_CONF='../conf/audio.conf'
-AUDIO_OUT='/mnt/franky/rips/audio'
-AUDIO_SRC='/dev/sr1'
-DVD_CONF='../conf/dvd.conf'
-BLURAY_CONF='../conf/bluray.conf'
-AUDIO_LOG='../html/logs/audio.txt'
-DVD_LOG='../html/logs/dvd.txt'
-BLURAY_LOG='../html/logs/bluray.txt'
-MAIN_LOG='../html/logs/main.txt'
-FULL_LOG='../html/logs/full.txt'
-STATE='../html/logs/state.txt'
+# Read configuration
+CONFIGFILE="../conf/main.conf"
+source $CONFIGFILE
 
 # Global vars
 CURRENT_LOG=$MAIN_LOG
@@ -102,7 +92,7 @@ function waitHandbrakeShutdown(){
     HANDBRAKE_PID=$(/bin/ps aux | /bin/grep HandBrakeCLI)
     set -- $HANDBRAKE_PID; HANDBRAKE_PID=$2
     if [ -n "$HANDBRAKE_PID" ]; then
-        while [ -e /proc/$HANDBRAKE_PID ]; do 
+        while [ -e /proc/$HANDBRAKE_PID ]; do
             sleep 1;
         done
     else
@@ -127,7 +117,7 @@ function filterLog(){
             fi
         else
             if [[ "$string" =~ $FILTER_MAKEMKV ]] || [[ "$string" =~ $FILTER_HANDBRAKE ]]; then
-                echo  "$string" >> $MAIN_LOG        
+                echo  "$string" >> $MAIN_LOG
             fi
         fi
     done
@@ -207,7 +197,7 @@ function ripBluRay(){
             writeLog 'error' 'Please insert a disc.'
             setState '0'
             exit 1
-        fi        
+        fi
         writeLog 'cmd' "/usr/bin/makemkvcon $BLURAY_OPTPRF $BLURAY_OPTACT $BLURAY_OPTMSC $BLURAY_OPTLOG $BLURAY_OPTDEV $BLURAY_OPTCNV $BLURAY_OPTMSC $BLURAY_OUT/$BLURAY_TITLE"
         writeLog 'info' $BLURAY_TITLE' has been saved. Ejecting disc now.'
         writeLog 'info' 'Waiting until all HandBrake jobs have been processed.'

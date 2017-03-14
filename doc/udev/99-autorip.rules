@@ -1,0 +1,3 @@
+## 99-autorip.rules
+## Author: Aaron Meier <aaron@bluespeed.org>
+SUBSYSTEM=="block", KERNEL=="sr0", ACTION=="change", RUN+="/opt/autorip/bin/identify.sh &"
