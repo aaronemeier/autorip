@@ -46,18 +46,18 @@ function writeLog(){
     TIMESTAMP=$(/bin/date +'[%d.%m.%Y|%H:%M]')
     case "$typ" in
         'info' )
-            echo -e $TIMESTAMP '[INFO]' $string >> $MAIN_LOG
-            echo -e $TIMESTAMP '[INFO]' $string >> $CURRENT_LOG
+            echo -e $TIMESTAMP '[INFO]' $string >> "$MAIN_LOG"
+            echo -e $TIMESTAMP '[INFO]' $string >> "$CURRENT_LOG"
             ;;
         'error' )
-            echo $TIMESTAMP '[ERROR]' $string >> $MAIN_LOG
-            echo $TIMESTAMP '[ERROR]' $string >> $CURRENT_LOG
+            echo $TIMESTAMP '[ERROR]' $string >> "$MAIN_LOG"
+            echo $TIMESTAMP '[ERROR]' $string >> "$CURRENT_LOG"
             ;;
         'cmd' )
             echo "$string" | sh 2>&1 | filterLog
             if [ $? != 0 ]; then
-                echo -e $TIMESTAMP '[ERROR] There was an error running "'$string'"' >> $MAIN_LOG
-                echo -e $TIMESTAMP '[ERROR] There was an error running "'$string'"' >> $CURRENT_LOG
+                echo -e $TIMESTAMP '[ERROR] There was an error running "'$string'"' >> "$MAIN_LOG"
+                echo -e $TIMESTAMP '[ERROR] There was an error running "'$string'"' >> "$CURRENT_LOG"
                 setState '0'
                 exit 1
             fi
@@ -104,7 +104,7 @@ function waitHandbrakeShutdown(){
 # Clean function for cleaning current logs
 function cleanLog(){
     if [ $(wc -l < $CURRENT_LOG) -gt 100 ]; then
-        cat $CURRENT_LOG | head -n 100 > $CURRENT_LOG
+        cat $CURRENT_LOG | head -n 100 > "$CURRENT_LOG"
     fi
 }
 
@@ -113,11 +113,11 @@ function filterLog(){
     echo "$string" &>> $FULL_LOG
         if [[ "$CURRENT_LOG" == "$AUDIO_LOG" ]]; then
             if [[ "$string" =~ $FILTER_ABCDE ]]; then
-                echo "$string" >> $MAIN_LOG
+                echo "$string" >> "$MAIN_LOG"
             fi
         else
             if [[ "$string" =~ $FILTER_MAKEMKV ]] || [[ "$string" =~ $FILTER_HANDBRAKE ]]; then
-                echo  "$string" >> $MAIN_LOG
+                echo  "$string" >> "$MAIN_LOG"
             fi
         fi
     done
@@ -150,7 +150,7 @@ function ripDVD(){
         setState '1'
         writeLog 'info' '----------------------------------------------'
         writeLog 'info' 'Starting DVD ripping.'
-        if [[ ! $DVD_TITLE == "" ]]; then
+        if [[ $DVD_TITLE != "" ]]; then
             writeLog 'cmd' "mkdir -p $DVD_OUT/$DVD_TITLE"
         else
             writeLog 'error' 'Please insert a disc.'
@@ -224,22 +224,19 @@ function ripBluRay(){
 }
 
 # Main entry point of this script
-#cd $AUTORIP_DIR
-#echo '' > $MAIN_LOG
-#echo '' > $FULL_LOG
 if [ $# == 1 ]; then
     case "$1" in
-        '-audio' )
+        'audio' )
             CURRENT_LOG=$AUDIO_LOG
             ripAudio
             exit 0
             ;;
-        '-dvd' )
+        'dvd' )
             CURRENT_LOG=$DVD_LOG
             ripDVD
             exit 0
             ;;
-        '-bluray' )
+        'bluray' )
             CURRENT_LOG=$BLURAY_LOG
             ripBluRay
             exit 0
@@ -253,8 +250,8 @@ This is free software, and you are welcome to redistribute it \n \
 under certain conditions; see COPYING for details."
     echo -e '\n[ERROR] Wrong parameter detected\n'
     echo -e 'Syntax:\t' $0 ' -TYP\n'
-    echo -e '\t-audio\tRips an audio disc\n'
-    echo -e '\t-dvd\tRips an DVD\n'
-    echo -e '\t-bluray\tRips an BluRay disc\n'
+    echo -e '\taudio\tRips an audio disc\n'
+    echo -e '\tdvd\tRips an DVD\n'
+    echo -e '\tbluray\tRips an BluRay disc\n'
     exit 0
 fi
