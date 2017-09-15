@@ -1,7 +1,9 @@
 # AutoRip
-With AutoRip you can save and convert audio and video discs automatically.  
+**Discontinued** 
+
+With Autorip you can save and convert audio and video discs automatically.  
 All you need is a Linux box (without X) and a disc drive.   
-In fact, AutoRip acts as a web frontend for MakeMKV, ABCDE and Handbrake.  
+In fact, Autorip acts as a web frontend for MakeMKV, ABCDE and Handbrake.  
 
 ## Requirements and Dependencies
 To automate this process, you need some third party tools installed.
@@ -38,7 +40,7 @@ regionset /dev/sr1
 ### AutoRip
 ```bash
 apt-get install git
-git clone hhttps://github.com/blue-ananas/autorip.git /opt/autorip
+git clone hhttps://github.com/cynja/autorip.git /opt/autorip
 useradd -M -s /usr/sbin/nologin -d /opt/autorip autorip
 chown -R autorip.autorip /opt/autorip
 ```
@@ -65,7 +67,6 @@ sed -i s/"HALEVT_GROUP=plugdev"/"HALEVT_GROUP=autorip"/g /etc/default/halevt
 sed -i s/"HALEVT_USER=plugdev"/"HALEVT_USER=autorip"/g /etc/default/halevt
 service halevt restart
 ```
-
 
 ### Nginx
 In order to have a very small memory footprint I use Nginx.  
@@ -101,7 +102,3 @@ AutoRip makes use of the following projects:
 * [jQuery DotDotDot](http://dotdotdot.frebsite.nl/)
 * [Bootstrap](http://getbootstrap.com/)
 * [Clamp.js](https://github.com/josephschmitt/Clamp.js/)
-
-## History
-* 1.0 - Final release of the program and its code.
-* master - Alpha version in development state.
